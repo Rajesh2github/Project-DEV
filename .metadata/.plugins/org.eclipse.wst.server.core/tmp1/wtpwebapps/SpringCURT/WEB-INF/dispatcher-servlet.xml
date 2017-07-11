@@ -1,0 +1,41 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+	<context:component-scan base-package="com.mvc.controller"></context:component-scan>
+    <context:component-scan base-package="com.mvc.serviceImpl"></context:component-scan>
+    <context:component-scan base-package="com.mvc.userRespositroyImpl"></context:component-scan>
+    <context:component-scan base-package="com.mvc.utils"></context:component-scan>
+ <!--    <context:component-scan base-package="com.second.repositryimpl"></context:component-scan>  -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/pages/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+	<bean id="multipartResolver"   
+class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+	<mvc:resources mapping="/resources/**" location="/resources/"  cache-period="31556926"/>
+	<mvc:annotation-driven />
+<bean id ="dBValues" class="com.mvc.utils.DBValues">
+<property name="driver" value="com.mysql.jdbc.Driver"></property>
+<property name="url" value="jdbc:mysql://localhost:3306/abhishekdb"></property>
+<property name="user" value="root"></property>
+<property name="password" value="rajesh"></property>
+</bean>
+ <bean id ="sqlQuerys" class="com.mvc.utils.SqlQuerys" >
+ <property name="userLogin" value="select * from admin where Admin_id=? and AdminPassword=?"></property>
+ </bean>
+
+</beans>
